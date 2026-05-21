@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPP-Learn — Học C++ & Thuật toán</title>
+  <meta name="description" content="Học C++ và thuật toán từ cơ bản đến nâng cao. Dành cho học sinh luyện thi Tin học Olympiad.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="main.css">
+
+  <style>
+    /* Mobile layout: hide sidebar by default (app.js handles toggle) */
+    @media (max-width: 768px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* Responsive problem layout */
+    @media (max-width: 900px) {
+      .prob-layout {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+      <button class="btn btn--ghost" id="hamburger" onclick="toggleSidebar()" title="Menu"
+        style="display:none;padding:6px 10px;font-size:1.2rem">☰</button>
+
+      <div class="header__logo">
+        <span style="font-size:1.4rem">⚡</span>
+        <span>CPP<span style="color:var(--accent)">Learn</span></span>
+      </div>
+
+      <nav class="header__nav">
+        <a href="#" data-page="home"     onclick="navigate('home');return false">🏠 Trang chủ</a>
+        <a href="#" data-page="learn"    onclick="navigate('learn');return false">📚 Học</a>
+        <a href="#" data-page="practice" onclick="navigate('practice');return false">💪 Bài tập</a>
+        <a href="#" data-page="roadmap"  onclick="navigate('roadmap');return false">🗺️ Lộ trình</a>
+      </nav>
+
+      <div class="header__right">
+        <div class="progress-pill" title="Tiến độ học">
+          <div class="bar">
+            <div class="bar-fill" style="width:0%"></div>
+          </div>
+          <span class="progress-text" style="font-size:.82rem;font-weight:600;color:var(--text2)">0/0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div id="sidebar-content">
+        <!-- Filled by renderSidebar() in app.js -->
+      </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main" id="main-content">
+
+      <!-- HOME PAGE -->
+      <div id="page-home" class="page">
+        <div id="home-content">
+          <!-- Filled by renderHome() in app.js -->
+        </div>
+      </div>
+
+      <!-- LEARN PAGE -->
+      <div id="page-learn" class="page">
+        <div id="learn-content">
+          <!-- Filled by renderLearnPage() / openLesson() in app.js -->
+        </div>
+      </div>
+
+      <!-- PRACTICE PAGE -->
+      <div id="page-practice" class="page">
+        <div id="practice-content">
+          <!-- Filled by renderPractice() in app.js -->
+        </div>
+      </div>
+
+      <!-- ROADMAP PAGE -->
+      <div id="page-roadmap" class="page">
+        <div id="roadmap-content">
+          <!-- Filled by renderRoadmap() in app.js -->
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.layout -->
+
+  <!-- Mobile overlay -->
+  <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+  <!-- ===== SCRIPTS =====
+       Thứ tự QUAN TRỌNG:
+       1. curriculum.js  — định nghĩa CURRICULUM (dữ liệu bài học)
+       2. app.js         — dùng CURRICULUM, gắn sự kiện, render UI
+       KHÔNG load highlight.ts hay Visualizers.tsx (TypeScript, browser không chạy được)
+  -->
+  <script src="curriculum.js"></script>
+  <script src="app.js"></script>
+
+  <script>
+    // Show hamburger on mobile
+    function checkMobile() {
+      const hamburger = document.getElementById('hamburger');
+      if (hamburger) hamburger.style.display = window.innerWidth <= 768 ? 'block' : 'none';
+    }
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+  </script>
+</body>
+</html>
